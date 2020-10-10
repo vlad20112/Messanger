@@ -37,8 +37,12 @@ class UserActivity : AppCompatActivity() {
             val fieldTwo: EditText = findViewById<EditText>(R.id.age_field)
             val fieldThree: ImageView = findViewById<ImageView>(R.id.img_field)
             val intent: Intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("name", fieldOne.text.toString())
-            intent.putExtra("age",fieldTwo.text.toString())
+                .apply {
+                    action = Intent.ACTION_SEND
+                    putExtra("name", fieldOne.text.toString())
+                    putExtra("age",fieldTwo.text.toString())
+                }
+
             //передавать ИД, на который пользователь нажал
             //intent.putExtra("avatar",fieldThree.get)
             startActivity(intent)
