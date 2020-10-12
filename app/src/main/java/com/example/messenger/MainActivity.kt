@@ -30,20 +30,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var bund: Bundle? = intent.extras
+        name = bund?.get("name").toString()
+        Log.d("Name from prev_activity", name)
+        age = bund?.get("age").toString()
+        Log.d("Age from prev_activity", age)
         /*Блок добавления*/
         message_list= mutableListOf()
-        name = "Human"
-        age = "44"
 
         viewManager = LinearLayoutManager(this)
+
         recyclerAdapter = MessageAdapter(message_list, name, age)
+        recyclerAdapter.notifyDataSetChanged()
 
         var butter: Button = findViewById<Button>(R.id.but)
         butter.setOnClickListener {
             var txt: EditText = findViewById(R.id.message_field)
             var perem: String = txt.text.toString()
             message_list.add(txt.text.toString())
-           myRef.push().setValue(perem)
+            myRef.push().setValue(name + "`" + age + "`" + perem)
         }
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -54,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                     layoutManager = viewManager
                     adapter = recyclerAdapter
                 }
-                //Добавить кусок кода, в котором будет происходить обновление списка с сообщениями
                 Log.d("DatabaseMessage", p0.getValue().toString())
             }
         })
@@ -83,9 +87,6 @@ class MainActivity : AppCompatActivity() {
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var b: Bundle? = data?.extras
-        //name = b?.get("name").toString()
-        //age = b?.get("age").toString()
         super.onActivityResult(requestCode, resultCode, data)
     }
 }
