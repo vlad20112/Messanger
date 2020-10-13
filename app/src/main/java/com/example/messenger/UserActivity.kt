@@ -7,6 +7,7 @@ import android.media.Image
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -38,10 +39,11 @@ class UserActivity : AppCompatActivity() {
             val fieldThree: ImageView = findViewById<ImageView>(R.id.img_field)
             val intent: Intent = Intent(this, MainActivity::class.java)
                 .apply {
-                    action = Intent.ACTION_SEND
                     putExtra("name", fieldOne.text.toString())
                     putExtra("age",fieldTwo.text.toString())
                 }
+            Log.d("value_name",fieldOne.text.toString())
+            Log.d("value age",fieldTwo.text.toString())
 
             //передавать ИД, на который пользователь нажал
             //intent.putExtra("avatar",fieldThree.get)
