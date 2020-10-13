@@ -1,18 +1,17 @@
-package com.example.messenger
+package com.example.messenger.Logic
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.messenger.Face
+import com.example.messenger.Adapters.MessageAdapter
+import com.example.messenger.R
 import com.google.firebase.database.*
-import java.util.ArrayList
-import java.util.zip.Inflater
 
 var database: FirebaseDatabase = FirebaseDatabase.getInstance()
 var myRef: DatabaseReference = database.getReference("mesage")
@@ -36,11 +35,16 @@ class MainActivity : AppCompatActivity() {
         age = bund?.get("age").toString()
         Log.d("Age from prev_activity", age)
         /*Блок добавления*/
-        message_list= mutableListOf()
+        message_list = mutableListOf()
 
         viewManager = LinearLayoutManager(this)
 
-        recyclerAdapter = MessageAdapter(message_list, name, age)
+        recyclerAdapter =
+            MessageAdapter(
+                message_list,
+                name,
+                age
+            )
         recyclerAdapter.notifyDataSetChanged()
 
         var butter: Button = findViewById<Button>(R.id.but)
@@ -55,7 +59,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                recyclerView = findViewById<RecyclerView>(R.id.message_list).apply {
+                recyclerView = findViewById<RecyclerView>(
+                    R.id.message_list
+                ).apply {
                     layoutManager = viewManager
                     adapter = recyclerAdapter
                 }

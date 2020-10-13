@@ -1,9 +1,10 @@
-package com.example.messenger
+package com.example.messenger.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.messenger.R
 import kotlinx.android.synthetic.main.message_card.view.*
 
 lateinit var nameUser: String

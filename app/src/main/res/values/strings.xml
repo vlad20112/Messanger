@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Messenger</string>
+    <string name="enterFIO">Введите фамилию, имя и отчество ответственного</string>
+    <string name="enterRoom">Выберите номер кабинета</string>
+    <string name="enterCampus">Выберите номер корпуса</string>
+    <string name="HintFIO">Данные ответственного</string>
 </resources>
